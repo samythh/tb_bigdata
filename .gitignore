@@ -1,0 +1,8 @@
+# File sementara Office (muncul saat dokumen dibuka)
+~$*
+*.tmp
+
+# File sistem
+Thumbs.db
+desktop.ini
+.DS_Store
