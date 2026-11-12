@@ -1,12 +1,14 @@
 # TB Big Data – Kelompok X
 
 Judul: **Analisis Data untuk Mendukung Pengambilan Keputusan Stakeholder Menggunakan Orange Data Mining**
-Ketentuan lengkap: slide materi Pertemuan 12 – Laporan Analisis Data
+Ketentuan lengkap: [00_Materi/P12 - Laporan Analisis Data.pdf](00_Materi/P12%20-%20Laporan%20Analisis%20Data.pdf)
+Ide & kandidat topik: [IDE_TOPIK.md](IDE_TOPIK.md)
 
 ## Struktur folder
 
 | Folder | Isi |
 |---|---|
+| `00_Materi/` | Materi/ketentuan TB dari dosen |
 | `01_Dataset/raw/` | Dataset asli sebelum preprocessing (.csv) + catatan sumber/lisensi |
 | `01_Dataset/processed/` | Dataset hasil preprocessing (.csv), diekspor dari Orange |
 | `02_Orange_Workflow/` | File workflow Orange (.ows) |
