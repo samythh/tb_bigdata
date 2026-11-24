@@ -38,10 +38,10 @@ Seluruh data mentah telah berhasil dikumpulkan, dibersihkan dari duplikat, dan d
 
 | Platform | Metode Pengumpulan | Target Min. | Data Bersih Unik | Status Kuota | Lokasi File |
 |---|---|---|---|---|---|
-| **X (Twitter)** | `tweet-harvest` (Node.js) | 500 | **750 baris** | 🟢 Terpenuhi (150%) | `01_Dataset/raw/data_mentah_x.csv` |
-| **YouTube** | YouTube Data API v3 | 500 | **1000 baris** | 🟢 Terpenuhi (200%) | `01_Dataset/raw/data_mentah_youtube.csv` |
-| **TikTok** | Assisted Manual Scraping | 500 | **1017 baris** | 🟢 Terpenuhi (203%) | `01_Dataset/raw/data_mentah_tiktok.csv` |
-| **DATA GABUNGAN** | Multi-Platform Consolidation | 1.500 | **2759 baris** | 🚀 **LENGKAP (183%)** | `01_Dataset/raw/data_mentah_gabungan.csv` |
+| **X (Twitter)** | Browser Console Scraping | 500 | **767 baris** | 🟢 Terpenuhi (153%) | `01_Dataset/raw/data_mentah_x.csv` |
+| **YouTube** | YouTube Data API v3 | 500 | **1.000 baris** | 🟢 Terpenuhi (200%) | `01_Dataset/raw/data_mentah_youtube.csv` |
+| **TikTok** | Assisted Manual Scraping | 500 | **1.017 baris** | 🟢 Terpenuhi (203%) | `01_Dataset/raw/data_mentah_tiktok.csv` |
+| **DATA GABUNGAN** | Multi-Platform Consolidation | 1.500 | **2.776 baris** | 🚀 **LENGKAP (185%)** | `01_Dataset/raw/data_mentah_gabungan.csv` |
 | **SAMPEL PELABELAN**| Stratified Random Sampling | 750–1.100 | **900 baris** | 🎯 **Siap Dilabel (300/platform)** | `01_Dataset/raw/sampel_pelabelan.csv` |
 
 ---
@@ -83,9 +83,7 @@ tb_bigdata/
 │   ├── model_sentimen.ows   # Workflow training & perbandingan model klasifikasi
 │   └── visualisasi.ows      # Workflow wordcloud, sebaran topik, & sentimen
 ├── 03_Visualisasi/          # Ekspor grafik (PNG) & screenshot workflow Orange
-├── 04_Laporan/              # Naskah laporan tugas besar (.docx & .md)
-│   ├── BAB_II_Data_Collection.docx
-│   └── BAB_II_Data_Collection.md
+├── 04_Laporan/              # Naskah laporan final tugas besar (diisi setelah kompilasi selesai)
 ├── 05_Presentasi/           # Slide presentasi Pertemuan 14 & 15
 ├── 06_Referensi/            # Dokumen jurnal/referensi pendukung (APA 7)
 ├── Final_Submit/            # Berkas final untuk pengumpulan di Google Classroom
@@ -101,7 +99,7 @@ tb_bigdata/
 |---|---|---|---|
 | **1️⃣ Koordinator & Integrator** | Rumusan masalah, stakeholder, template docx, BAB I & V, kompilasi laporan & slide | `Laporan Final (.docx)`, `Slide Presentasi` | Sedang Berjalan |
 | **2️⃣ Pengumpul YouTube** | Crawling komentar YouTube berita via API, timeline peristiwa, BAB I | `data_mentah_youtube.csv`, Timeline | 🟢 Selesai |
-| **3️⃣ Pengumpul X & Integrator** | Crawling data X, standarisasi 8 kolom, gabung 3 platform, buat sampel 900 baris, BAB II | `data_mentah_x.csv`, `data_mentah_gabungan.csv`, `sampel_pelabelan.csv`, `BAB II (.docx)` | 🟢 Selesai |
+| **3️⃣ Pengumpul X & Integrator** | Crawling data X, standarisasi 8 kolom, gabung 3 platform, buat sampel 900 baris, BAB II | `data_mentah_x.csv`, `data_mentah_gabungan.csv`, `sampel_pelabelan.csv`, BAB II (Google Docs) | 🟢 Selesai |
 | **4️⃣ Pengumpul TikTok** | Crawling komentar TikTok berita/edukator, log pengumpulan, bagian etika data | `data_mentah_tiktok.csv`, Dokumentasi Etika | 🟢 Selesai |
 | **5️⃣ Preprocessing Teks** | Kamus gaul (slang), stopwords, pembersihan teks di Orange (`preprocessing.ows`), BAB III | `preprocessing.ows`, `data_bersih.csv`, `BAB III` | Tahap Selanjutnya |
 | **6️⃣ Pelabelan & Pemodelan** | Panduan label, pelabelan sampel 900 baris, training model (SVM, Naive Bayes, LR), BAB IV.1-2 | `model_sentimen.ows`, `data_berlabel.csv`, Evaluasi Model | Tahap Selanjutnya |
@@ -111,7 +109,7 @@ tb_bigdata/
 
 ## ✅ Checklist Standar Luaran Minimum (Rubrik P12)
 
-- [x] Sumber data primer digital lintas platform (≥ 500 baris per platform, total 3.807 baris).
+- [x] Sumber data primer digital lintas platform (≥ 500 baris per platform, total 2.776 baris unik).
 - [x] Kontrak skema 8 kolom baku dan kepatuhan etika anonimisasi data.
 - [ ] Minimal 3 pertanyaan analisis yang terdefinisi jelas.
 - [ ] Minimal 3 visualisasi data yang relevan dari Orange Data Mining.
