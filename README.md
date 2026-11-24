@@ -40,8 +40,8 @@ Seluruh data mentah telah berhasil dikumpulkan, dibersihkan dari duplikat, dan d
 |---|---|---|---|---|---|
 | **X (Twitter)** | `tweet-harvest` (Node.js) | 500 | **750 baris** | 🟢 Terpenuhi (150%) | `01_Dataset/raw/data_mentah_x.csv` |
 | **YouTube** | YouTube Data API v3 | 500 | **1000 baris** | 🟢 Terpenuhi (200%) | `01_Dataset/raw/data_mentah_youtube.csv` |
-| **TikTok** | Assisted Manual Scraping | 500 | **1191 baris** | 🟢 Terpenuhi (238%) | `01_Dataset/raw/data_mentah_tiktok.csv` |
-| **DATA GABUNGAN** | Multi-Platform Consolidation | 1.500 | **2923 baris** | 🚀 **LENGKAP (194%)** | `01_Dataset/raw/data_mentah_gabungan.csv` |
+| **TikTok** | Assisted Manual Scraping | 500 | **1017 baris** | 🟢 Terpenuhi (203%) | `01_Dataset/raw/data_mentah_tiktok.csv` |
+| **DATA GABUNGAN** | Multi-Platform Consolidation | 1.500 | **2759 baris** | 🚀 **LENGKAP (183%)** | `01_Dataset/raw/data_mentah_gabungan.csv` |
 | **SAMPEL PELABELAN**| Stratified Random Sampling | 750–1.100 | **900 baris** | 🎯 **Siap Dilabel (300/platform)** | `01_Dataset/raw/sampel_pelabelan.csv` |
 
 ---

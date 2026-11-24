@@ -75,8 +75,8 @@ Berdasarkan hasil pengumpulan dan pra-pembersihan tahap awal, rekapitulasi volum
 |---|---|---|---|---|---|
 | **X (Twitter)** | `tweet-harvest` (Node.js) | 500 baris | 750 | **750 baris** | **Terpenuhi (150%)** |
 | **YouTube** | YouTube Data API v3 | 500 baris | 1000 | **1000 baris** | **Terpenuhi (200%)** |
-| **TikTok** | Assisted Manual Scraping | 500 baris | 1191 | **1191 baris** | **Terpenuhi (238%)** |
-| **Total Gabungan** | Multi-platform merge | 1.500 baris | 2941 | **2923 baris** | **Lengkap (194%)** |
+| **TikTok** | Assisted Manual Scraping | 500 baris | 1017 | **1017 baris** | **Terpenuhi (203%)** |
+| **Total Gabungan** | Multi-platform merge | 1.500 baris | 2767 | **2759 baris** | **Lengkap (183%)** |
 
 ---
 
