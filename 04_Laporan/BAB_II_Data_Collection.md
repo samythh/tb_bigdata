@@ -1,97 +1,88 @@
 # BAB II: DATA COLLECTION DAN PEMAHAMAN DATASET
 
 ## 2.1 Deskripsi Dataset
-Dataset yang digunakan dalam penelitian ini merupakan dataset opini publik berbasis teks (*user-generated text*) yang dihimpun dari tiga platform media sosial terkemuka di Indonesia, yaitu **X (dahulu Twitter)**, **YouTube**, dan **TikTok**. Pengumpulan data difokuskan pada respons, percakapan, kritik, serta reaksi masyarakat terhadap isu pengunduran diri Wakil Presiden Republik Indonesia beserta dinamika politik, hukum, dan etika yang menyertainya (termasuk polemik keabsahan syarat pencalonan, isu pemakzulan, hingga jejak digital akun Fufufafa).
 
-Ketiga platform tersebut dipilih secara sengaja (*purposive*) guna merepresentasikan demografi dan karakteristik warganet yang beragam:
-1. **X (Twitter):** Merepresentasikan diskursus opini publik yang dinamis, cepat, sarat akan perdebatan politik, analisis kritis, serta percakapan berbasis teks secara *real-time*.
-2. **YouTube:** Merepresentasikan tanggapan audiens terhadap pemberitaan video berdurasi panjang dari kanal-kanal berita resmi dan independen (seperti Kompas TV, CNN Indonesia, dll.), yang cenderung menyajikan argumen lebih panjang dan kontekstual.
-3. **TikTok:** Merepresentasikan respons masyarakat dari kalangan generasi muda (Gen-Z dan milenial) yang merespons cuplikan video singkat viral seputar peristiwa politik terkini.
+Dataset yang digunakan dalam penelitian ini berupa data teks komentar dan opini publik yang dihimpun dari tiga platform media sosial, yaitu YouTube, X (Twitter), dan TikTok. Unit data terkecil yang dianalisis adalah per satu baris data yang mewakili satu komentar atau cuitan unik dari pengguna. Seluruh data yang diambil menggunakan bahasa Indonesia, baik ragam bahasa baku maupun ragam bahasa percakapan sehari-hari (bahasa gaul) yang lazim digunakan masyarakat pada kolom interaksi media sosial.
 
-Data yang dikumpulkan mencakup atribut metadata penting seperti tanggal pengunggahan, platform asal, teks komentar/cuitan, metrik keterlibatan (*likes* dan *replies*), serta kata kunci pencarian. Sebelum dilakukan analisis pemodelan, dataset mentah ini melalui standardisasi skema data agar dapat digabungkan secara terpadu.
+Pengumpulan data difokuskan secara ketat pada rentang waktu **12 November hingga 24 November 2026**. Periode ini dipilih karena bertepatan langsung dengan peristiwa penyerahan surat pengunduran diri Wakil Presiden Republik Indonesia (Gibran Rakabuming Raka) ke pimpinan MPR RI pada 12 November 2026, serta dinamika respons masyarakat yang berkembang pada hari-hari setelahnya. Secara keseluruhan, terkumpul sebanyak 2.767 baris data mentah dari ketiga platform, yang setelah melalui tahap pembersihan dan deduplikasi menghasilkan **2.759 data gabungan unik**. Rincian jumlah sumber, volume data, dan periode waktu pengumpulan disajikan pada Tabel 2.1.
+
+### Tabel 2.1 Ringkasan Dataset per Platform
+
+| Platform | Jumlah Sumber | Jumlah Komentar Mentah | Periode Komentar |
+| :--- | :--- | :---: | :---: |
+| **YouTube** | 5 video berita resmi | 1.000 komentar | 12 November 2026 – 19 November 2026 |
+| **X (Twitter)** | Kueri penelusuran terarah | 750 cuitan unik | 12 November 2026 – 18 November 2026 |
+| **TikTok** | 15 video konten viral | 1.017 komentar | 12 November 2026 – 24 November 2026 |
+| **Total** | 20 video & kueri penelusuran | **2.767 komentar mentah** | **12 November 2026 – 24 November 2026** |
+
+*Sumber: Data primer penelitian diolah (2026)*
 
 ---
 
 ## 2.2 Sumber dan Metode Pengumpulan Data
 
-### 2.2.1 Sumber Data
-Sumber data primer diperoleh secara langsung dari media sosial menggunakan teknik penambangan data digital (*digital data scraping*) dan pemanfaatan Application Programming Interface (API) resmi, dengan rincian sebagai berikut:
-- **Platform X:** Diambil dari linimasa percakapan publik, cuitan orisinal, serta balasan (*replies*) terhadap isu terkait mulai rentang peristiwa November 2026.
-- **Platform YouTube:** Diambil dari kolom komentar pada 5–10 video berita resmi dari stasiun televisi dan media berita nasional terpercaya yang memberitakan pengunduran diri Wapres dan sidang istimewa MPR.
-- **Platform TikTok:** Diambil dari kolom komentar video-video viral bertema berita politik terkait.
+### 2.2.1 YouTube
+Data komentar dari platform YouTube dikumpulkan menggunakan skrip Python yang memanfaatkan antarmuka resmi **YouTube Data API v3**, khususnya *endpoint* `commentThreads.list`. Pengambilan data dilaksanakan pada tanggal 19 November 2026.
 
-### 2.2.2 Metode dan Prosedur Pengumpulan Data
-Pengumpulan data dilakukan dengan pendekatan terstruktur untuk memastikan validitas dan keterwakilan data:
-1. **Penentuan Kata Kunci (Query Formulation):**
-   Pengumpulan data menggunakan serangkaian kata kunci terarah dalam bahasa Indonesia guna membatasi cakupan topik agar tetap relevan dan menghindari *noise*. Kata kunci utama yang disepakati bersama meliputi:
-   - *"Gibran mundur"*
-   - *"pengunduran diri wapres"*
-   - *"wapres pengganti"*
-   - *"sidang istimewa MPR"*
-   - *"keabsahan wakil presiden / ijazah Gibran"*
-   - *"akun fufufafa wapres"*
+Kriteria pemilihan video didasarkan pada tayangan berita dari kanal media massa nasional terverifikasi dan kredibel yang memiliki tingkat penayangan (*views*) dan interaksi tinggi seputar peristiwa pengunduran diri Wapres. Sumber video mencakup 5 kanal berita: tvOneNews, Liputan6, BeritaSatu, KOMPASTV Jember, serta tayangan dokumentasi Sekretariat Wakil Presiden RI. Kata kunci penelusuran meliputi: *"pengunduran diri wapres"*, *"Gibran mundur"*, dan *"sidang MPR"*. Dari proses ekstraksi ini, berhasil diperoleh tepat **1.000 baris komentar teratas** beserta metadata jumlah tanda suka (*likes*) dalam rentang tanggal 12 hingga 19 November 2026.
 
-2. **Ekstraksi Data X (Twitter):**
-   Pengumpulan data X dilakukan menggunakan *crawling tool* berbasis Node.js/Chromium (`tweet-harvest`) dengan parameter penelusuran spesifik:
-   - Filter bahasa: `lang:id` (hanya cuitan berbahasa Indonesia).
-   - Filter retweet: `-is:retweet` (menghindari duplikasi masif dari fitur *retweet* otomatis).
-   - Penjelajahan linimasa: Mengombinasikan tab *Top Tweets* dan *Latest Tweets* untuk menangkap baik cuitan dengan atensi tinggi maupun dinamika kronologis netizen.
-   - Dari 181 variasi pencarian, terkumpul sebanyak **4.558 baris data mentah**, yang kemudian melalui tahap eliminasi duplikat ID sehingga menghasilkan **1.634 cuitan unik**.
+### 2.2.2 X (Twitter)
+Pengumpulan data dari platform X dilakukan menggunakan alat bantu penelusuran berbasis otomasi *browser* Chromium dan Node.js, yaitu `tweet-harvest`. Pengambilan data dilaksanakan secara bertahap pada rentang tanggal 14 hingga 18 November 2026.
 
-3. **Ekstraksi Data YouTube:**
-   Pengumpulan komentar video YouTube dilakukan menggunakan skrip otomasi yang memanfaatkan layanan resmi **YouTube Data API v3** (`commentThreads.list`). Data diambil dari video pemberitaan dengan interaksi tertinggi untuk menjaring perspektif pemirsa berita.
+Penelusuran dilakukan pada linimasa publik menggunakan kueri terarah dengan memadukan tab *Top Tweets* dan *Latest Tweets*. Parameter pencarian menyertakan filter bahasa Indonesia (`lang:id`) dan pengecualian *retweet* (`-is:retweet`) agar tidak terjadi penumpukan postingan dari fitur *retweet* otomatis. Kata kunci penelusuran mencakup variasi: *"gibran mundur"*, *"pengunduran diri wapres"*, *"wapres pengganti"*, *"sidang istimewa mpr"*, *"keabsahan wakil presiden"*, dan *"fufufafa wapres"*.
 
-4. **Ekstraksi Data TikTok:**
-   Pengumpulan komentar TikTok dilakukan dengan teknik *assisted scraping* / ekstraksi manual terstruktur terhadap video berita viral, di mana format tanggal relatif (seperti *"3 hari lalu"*) dikonversi menjadi tanggal absolut (*YYYY-MM-DD*).
+Pada proses penarikan awal, penggunaan kueri umum seperti *"pengunduran diri wapres"* sempat menjaring cuitan lama dari tahun 2012–2014 (isu pengunduran diri Wapres Boediono pada masa lampau) karena kesamaan frasa kata kunci. Menyadari hal tersebut, peneliti melakukan penyaringan ketat berbasis pencocokan entitas (*Gibran*, *putusan MK*, *Mahfud MD*, *sidang MPR*) dan pemangkasan kronologis waktu secara absolut pasca 12 November 2026. Dari proses kurasi dan eliminasi duplikasi tersebut, diperoleh sebanyak **750 cuitan unik dan bersih** yang sepenuhnya memuat opini publik terkait pengunduran diri Wapres Gibran.
 
-### 2.2.3 Prinsip Etika dan Privasi Data
-Dalam menjaga integritas akademik dan privasi pengguna media sosial, proses pengumpulan data mematuhi prinsip-prinsip etika data:
-- **Anonimisasi Identitas:** Seluruh nama akun (*username*), nama tampilan (*display name*), dan ID pengguna tidak disimpan dalam dataset akhir. Mention terhadap akun tertentu (misal `@nama_orang`) disamarkan menjadi `@user`.
-- **Penghapusan Data Sensitif:** Tautan (*URL*), nomor telepon pribadi, dan informasi identitas pribadi (*Personally Identifiable Information / PII*) dibersihkan dari isi teks.
-- **Tujuan Akademik:** Data yang dikumpulkan bersifat publik dan semata-mata dimanfaatkan untuk kepentingan analisis akademik, bukan untuk profiling individu, penyerangan pribadi, atau komersialisasi.
+### 2.2.3 TikTok
+Pengumpulan data dari TikTok dilakukan terhadap konten video ulasan berita dan analisis opini politik yang viral seputar pengunduran diri wakil presiden. Sumber konten mencakup akun media berita nasional (seperti KompasTV, Detikcom, MetroTV, IDN Times, Inilah.com, Pikiran Rakyat) serta kreator konten opini publik terverifikasi (seperti Raymond Chin, Andovi Da Lopez, Gerald Vincent, dan Sadam Permana).
+
+Ekstraksi data dilakukan terhadap 15 tautan video dengan tingkat interaksi tinggi. Pada penarikan versi awal, ditemukan sejumlah komentar yang tertanggal 10–11 November akibat kalkulasi tanggal relatif pada video yang diunggah mendahului isu resmi. Untuk menjaga validitas ilmiah penelitian, tim melakukan pembaruan dataset secara menyeluruh dengan mengambil ulang data komentar yang terbit pasca peristiwa resmi. Dari pembaruan ini, terkumpul **1.017 baris komentar bersih** yang seluruhnya berada pada rentang tanggal 12 November hingga 24 November 2026.
+
+### 2.2.4 Etika Pengumpulan Data
+Proses pengumpulan data dalam penelitian ini sepenuhnya mematuhi prinsip etika penelitian sosial komputasional dan perlindungan privasi data digital warganet, dengan penerapan kaidah sebagai berikut:
+
+1. **Anonimisasi Identitas Pengguna:** Demi menjaga privasi pemilik akun, nama akun (*username*), nama profil (*display name*), nomor ID unik akun, serta tanda *mention* akun (seperti format `@namaakun`) disamarkan secara otomatis menjadi `@user` pada seluruh baris dataset.
+2. **Penyaringan Informasi Pribadi:** Kandungan informasi pribadi sensitif (*Personally Identifiable Information / PII*) seperti nomor telepon, alamat email, dan tautan luar (*URL*) disaring dan dihilangkan dari teks komentar.
+3. **Kepatuhan terhadap Akses Publik:** Penarikan data YouTube dilakukan melalui API resmi pengembang. Untuk platform X dan TikTok, data yang diambil merupakan percakapan pada linimasa publik terbuka tanpa meretas atau mengakses akun yang bersifat privat (*private account*).
+4. **Tujuan Akademik:** Seluruh dataset yang dihimpun semata-mata dimanfaatkan untuk kebutuhan analisis ilmiah tugas besar mata kuliah Big Data dan tidak digunakan untuk tujuan komersial, perundungan siber, maupun *profiling* personal terhadap individu tertentu.
 
 ---
 
 ## 2.3 Karakteristik dan Struktur Dataset
 
-### 2.3.1 Struktur Kolom Dataset
-Untuk menyatukan data dari ketiga platform yang memiliki struktur asal berbeda, tim menetapkan sebuah kontrak standar yang terdiri dari **8 kolom wajib**. Struktur ini dirancang untuk kompatibilitas penuh dengan perangkat lunak **Orange Data Mining**:
+Data mentah yang diperoleh dari masing-masing platform memiliki perbedaan struktur skema awal. Untuk menyelaraskan data agar siap diproses pada perangkat lunak Orange Data Mining, tim peneliti menetapkan struktur kontrak baku yang terdiri atas **8 atribut kolom seragam**. Rincian struktur kolom dijelaskan pada Tabel 2.2.
 
-| No | Nama Kolom | Tipe Data | Deskripsi dan Format | Contoh Isi |
-|---|---|---|---|---|
-| 1 | `id` | String | Pengenal unik berurutan per platform sebagai *primary key* | `X-0001`, `YT-0001`, `TT-0001` |
-| 2 | `tanggal` | Date | Tanggal publikasi postingan (Format ISO: `YYYY-MM-DD`) | `2026-10-13`, `2026-11-12` |
-| 3 | `platform` | Categorical | Nama platform media sosial sumber (huruf kecil) | `x`, `youtube`, `tiktok` |
-| 4 | `teks` | Text | Teks komentar/cuitan bersih dari *line break*, siap diolah | *"Lebih terhormat hormati putusan MK..."* |
-| 5 | `like` | Integer | Jumlah tanda suka (*likes/favorites*), default: 0 | `15`, `120` |
-| 6 | `balas` | Integer | Jumlah balasan (*replies/comments count*), default: 0 | `2`, `14` |
-| 7 | `kata_kunci`| Categorical | Kata kunci pencarian atau topik pemicu pengumpulan | `pengunduran diri wapres` |
-| 8 | `sentimen`  | Categorical | Label kelas sentimen (*positif*, *netral*, *negatif*) | *(Diisi saat tahap pelabelan)* |
+### Tabel 2.2 Struktur Kolom Dataset Gabungan
 
-### 2.3.2 Distribusi dan Volume Data
-Berdasarkan hasil pengumpulan dan pra-pembersihan tahap awal, rekapitulasi volume data antarmedia dijabarkan pada tabel berikut:
+| Nama Kolom | Tipe Data | Format / Aturan | Keterangan dan Contoh |
+| :--- | :---: | :--- | :--- |
+| `id` | String / Teks | Prefix platform + nomor urut | Identitas unik per record data (Contoh: `X-0001`, `YT-0001`, `TT-0001`) |
+| `tanggal` | Date / Tanggal | ISO 8601 (`YYYY-MM-DD`) | Tanggal komentar dipublikasikan (Rentang: `2026-11-12` s.d. `2026-11-24`) |
+| `platform` | Kategorikal | Huruf kecil | Nama media sosial sumber data (`x`, `youtube`, `tiktok`) |
+| `teks` | String / Teks | Teks bersih tanpa line break | Isi komentar opini publik setelah dibersihkan dari mention dan URL |
+| `like` | Numerik (Integer) | Angka bulat non-negatif | Jumlah tanda suka yang diperoleh komentar (indikator persetujuan publik) |
+| `balas` | Numerik (Integer) | Angka bulat non-negatif | Jumlah tanggapan balasan pada komentar (indikator interaktivitas) |
+| `kata_kunci` | Kategorikal | Topik penelusuran | Frasa query penelusuran data (Default: `pengunduran diri wapres`) |
+| `sentimen` | Kategorikal | Target klasifikasi | Label polaritas sentimen (*Positif*, *Netral*, *Negatif*) yang diisi pada tahap pelabelan |
 
-| Platform | Metode Pengumpulan | Target Minimal | Data Mentah Terkumpul | Data Bersih & Unik | Status Keterpenuhan |
-|---|---|---|---|---|---|
-| **X (Twitter)** | `tweet-harvest` (Node.js) | 500 baris | 750 | **750 baris** | **Terpenuhi (150%)** |
-| **YouTube** | YouTube Data API v3 | 500 baris | 1000 | **1000 baris** | **Terpenuhi (200%)** |
-| **TikTok** | Assisted Manual Scraping | 500 baris | 1017 | **1017 baris** | **Terpenuhi (203%)** |
-| **Total Gabungan** | Multi-platform merge | 1.500 baris | 2767 | **2759 baris** | **Lengkap (183%)** |
+*Sumber: Spesifikasi rancangan data kelompok (2026)*
+
+Selain menyusun dataset gabungan utuh sebanyak 2.759 baris, peneliti juga menyiapkan sampel pelabelan (`sampel_pelabelan.csv`) sebanyak **900 baris data** melalui metode *stratified random sampling*. Sampel ini dibagi secara proporsional dan berimbang, yaitu masing-masing tepat **300 baris dari platform X, 300 baris dari YouTube, dan 300 baris dari TikTok**. Seluruh baris sampel berada dalam rentang tanggal 12 hingga 24 November 2026, yang diperuntukkan bagi proses anotasi sentimen manual (*ground truth*) oleh anggota tim sebelum digunakan untuk melatih algoritma klasifikasi di Orange.
 
 ---
 
 ## 2.4 Relevansi Dataset terhadap Permasalahan
 
-Keberhasilan analisis data sangat bergantung pada derajat kesesuaian antara data yang dihimpun dengan rumusan masalah yang dihadapi oleh *stakeholder* utama, yaitu **Kantor Komunikasi Kepresidenan (Presidential Communication Office / PCO)** dan **KPU / Pemerintah**. Dataset ini memiliki tingkat relevansi yang sangat tinggi ditinjau dari tiga dimensi:
+Penggunaan dataset teks opini publik dari tiga platform media sosial ini dinilai sangat relevan dan tepat guna untuk menjawab rumusan masalah penelitian serta menyediakan wawasan strategis bagi pemangku kepentingan (*stakeholder*) utama, yaitu **Kantor Komunikasi Kepresidenan (Presidential Communication Office / PCO)** dan **Komisi Pemilihan Umum (KPU)**. Kesesuaian ini didasarkan pada empat pertimbangan analitis:
 
-1. **Memotret Sentimen Publik Secara *Multi-Perspective*:**
-   Isu pengunduran diri seorang pimpinan negara merupakan peristiwa politik luar biasa yang memicu polarisasi opini yang tajam. Dengan menghimpun percakapan dari X, YouTube, dan TikTok, dataset ini mampu menangkap beragam spektrum sentimen:
-   - Opini kritis/kontra (tuntutan pertanggungjawaban etika, desakan pengunduran diri).
-   - Opini pro/legitimasi (penghormatan terhadap putusan pemilu, narasi stabilitas nasional).
-   - Opini netral/analitis (diskusi tata negara mengenai mekanisme sidang istimewa MPR dan figur pengganti).
+1. **Menjangkau Demografi Opini yang Luas dan Berimbang:**  
+   Peristiwa pengunduran diri seorang pimpinan negara menyedot perhatian lintas generasi. Pemanfaatan tiga platform mencegah bias opini: audiens YouTube mewakili masyarakat yang menyimak ulasan berita mendalam berdurasi panjang dengan argumen analitis; pengguna X mewakili kelompok yang aktif dalam diskursus perdebatan politik, konstitusi, dan kritik kebijakan *real-time*; sedangkan pengguna TikTok merepresentasikan suara kelompok pemilih muda (Gen-Z dan milenial) dengan gaya bahasa lugas.
 
-2. **Dukungan Terhadap Pengambilan Keputusan Strategis Komunikasi:**
-   Melalui atribut metrik interaksi (`like` dan `balas`), stakeholder dapat mengidentifikasi bukan hanya apa yang dibicarakan publik, melainkan **narasi mana yang paling banyak diamplifikasi dan memperoleh resonansi publik paling kuat**. Hal ini krusial bagi Kantor Komunikasi Kepresidenan dalam merancang strategi diseminasi informasi publik yang responsif, menenangkan spekulasi liar, serta mengikis disinformasi.
+2. **Memotret Sentimen Riil dan Organik:**  
+   Komentar warganet di media sosial diunggah secara sukarela dan spontan tanpa rekayasa kuesioner formal. Data ini memberikan potret nyata mengenai penerimaan masyarakat terhadap alasan pengunduran diri, spekulasi figur pengganti, serta isu keabsahan hukum tata negara pasca peristiwa.
 
-3. **Kesiapan Teknis untuk Pengolahan di Orange Data Mining:**
-   Data teks telah melalui proses standardisasi bebas karakter tersembunyi (*hidden line breaks* dan karakter non-UTF-8), sehingga siap dimasukkan ke dalam *widget* **Corpus**, **Preprocess Text**, **Word Cloud**, hingga **Sentiment Analysis / Classification** di Orange Data Mining tanpa kendala ketidakcocokan tipe data.
+3. **Mendukung Keputusan Strategis Komunikasi Publik:**  
+   Atribut metrik interaksi (*likes* dan *balas*) memungkinkan pemangku kepentingan memetakan narasi mana yang memperoleh resonansi atau persetujuan tertinggi dari masyarakat. Wawasan ini sangat dibutuhkan oleh Kantor Komunikasi Kepresidenan untuk merumuskan narasi klarifikasi resmi, meredam spekulasi yang memicu kepanikan politik, dan menjaga stabilitas nasional selama masa transisi.
+
+4. **Kesiapan Alur Pengolahan pada Orange Data Mining:**  
+   Dataset yang telah dibersihkan dari format *line break* acak, karakter non-standar, dan telah dianonimkan dapat langsung dihubungkan ke *widget* **Corpus**, **Preprocess Text**, **Word Cloud**, hingga algoritma klasifikasi sentimen di Orange Data Mining tanpa menimbulkan kendala *parsing* tipe data.
