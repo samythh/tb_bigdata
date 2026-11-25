@@ -78,12 +78,20 @@ tb_bigdata/
 │   │   ├── data_mentah_gabungan.csv
 │   │   └── sampel_pelabelan.csv
 │   └── processed/           # Dataset hasil preprocessing & hasil prediksi sentimen
+│       ├── kamus_normalisasi.csv   # Kamus kata gaul → baku (peran 5)
+│       ├── stopwords_id.txt        # Daftar stopword Bahasa Indonesia (peran 5)
+│       ├── data_bersih.csv         # 2.660 baris hasil preprocessing (peran 5)
+│       ├── data_berlabel.csv       # 860 baris sampel berlabel manual (peran 6)
+│       ├── uji_konsistensi_label.csv # 80 baris uji antar-pelabel, kappa 0,84 (peran 6)
+│       ├── data_hasil_sentimen.csv # 2.660 baris + sentimen final (input peran 7)
+│       └── id_komentar_kanal_resmi_wapres.csv # 250 ID komentar YouTube dari kanal resmi Wapres (peran 6)
 ├── 02_Orange_Workflow/      # File alur kerja Orange Data Mining (.ows)
 │   ├── preprocessing.ows    # Workflow pembersihan & normalisasi teks
 │   ├── model_sentimen.ows   # Workflow training & perbandingan model klasifikasi
-│   └── visualisasi.ows      # Workflow wordcloud, sebaran topik, & sentimen
+│   └── analisis_visualisasi.ows # Workflow wordcloud, topik, tren, & sentimen (peran 7)
 ├── 03_Visualisasi/          # Ekspor grafik (PNG) & screenshot workflow Orange
 ├── 04_Laporan/              # Naskah laporan final tugas besar (diisi setelah kompilasi selesai)
+│   └── bahan/               # Bahan per bab: BAB I & timeline (peran 2), hasil_evaluasi_model.md & panduan_label.md (peran 6)
 ├── 05_Presentasi/           # Slide presentasi Pertemuan 14 & 15
 ├── 06_Referensi/            # Dokumen jurnal/referensi pendukung (APA 7)
 ├── Final_Submit/            # Berkas final untuk pengumpulan di Google Classroom
@@ -101,9 +109,9 @@ tb_bigdata/
 | **2️⃣ Pengumpul YouTube** | Crawling komentar YouTube berita via API, timeline peristiwa, BAB I | `data_mentah_youtube.csv`, Timeline | 🟢 Selesai |
 | **3️⃣ Pengumpul X & Integrator** | Crawling data X, standarisasi 8 kolom, gabung 3 platform, buat sampel 900 baris, BAB II | `data_mentah_x.csv`, `data_mentah_gabungan.csv`, `sampel_pelabelan.csv`, BAB II (Google Docs) | 🟢 Selesai |
 | **4️⃣ Pengumpul TikTok** | Crawling komentar TikTok berita/edukator, log pengumpulan, bagian etika data | `data_mentah_tiktok.csv`, Dokumentasi Etika | 🟢 Selesai |
-| **5️⃣ Preprocessing Teks** | Kamus gaul (slang), stopwords, pembersihan teks di Orange (`preprocessing.ows`), BAB III | `preprocessing.ows`, `data_bersih.csv`, `BAB III` | Tahap Selanjutnya |
-| **6️⃣ Pelabelan & Pemodelan** | Panduan label, pelabelan sampel 900 baris, training model (SVM, Naive Bayes, LR), BAB IV.1-2 | `model_sentimen.ows`, `data_berlabel.csv`, Evaluasi Model | Tahap Selanjutnya |
-| **7️⃣ Analisis & Visualisasi** | Grafik sebaran sentimen, tren waktu, word cloud, rumusan insight & rekomendasi, BAB IV.3-5 | `visualisasi.ows`, Grafik PNG, BAB IV.3-5 | Tahap Selanjutnya |
+| **5️⃣ Preprocessing Teks** | Kamus gaul (slang), stopwords, pembersihan teks di Orange (`preprocessing.ows`), BAB III | `preprocessing.ows`, `data_bersih.csv`, `BAB III` | 🟢 Data & workflow selesai |
+| **6️⃣ Pelabelan & Pemodelan** | Panduan label, pelabelan sampel 900 baris, training model (SVM, Naive Bayes, LR), BAB IV.1-2 | `model_sentimen.ows`, `data_berlabel.csv`, `data_hasil_sentimen.csv`, Evaluasi Model | 🟢 Data & workflow selesai |
+| **7️⃣ Analisis & Visualisasi** | Grafik sebaran sentimen, tren waktu, word cloud, rumusan insight & rekomendasi, BAB IV.3-5 | `analisis_visualisasi.ows`, Grafik PNG, BAB IV.3-5 | 🟡 Sedang Berjalan |
 
 ---
 
